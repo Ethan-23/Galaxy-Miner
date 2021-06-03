@@ -2,13 +2,9 @@
 """
 Contains the class DBStorage
 """
-
-import models
-from models.base_model import BaseModel
 from models.user import User
 from os import getenv
 from pymongo import MongoClient
-import bson
 
 classes = {"User": User}
 
@@ -46,16 +42,6 @@ class DBStorage:
             print(e)
             print("new")
 
-
-    # def save(self):
-    #     """commit all changes of the current database session"""
-    #     try:
-    #         self.__engine.insert_one(self)
-    #     except Exception as e:
-    #         print(e)
-    #         print("save")
-
-
     def delete(self, obj=None):
         """delete from the current database session obj if not None"""
         try:
@@ -64,41 +50,3 @@ class DBStorage:
         except Exception as e:
             print("delete")
             print(e)
-
-    # def reload(self):
-    #     """reloads data from the database"""
-    #     print("Save")
-
-    # def close(self):
-    #     """call remove() method on the private session attribute"""
-    #     self.__session.remove()
-
-    # def get(self, cls, id):
-    #     """
-    #     Returns the object based on the class name and its ID, or
-    #     None if not found
-    #     """
-    #     if cls not in classes.values():
-    #         return None
-
-    #     all_cls = models.storage.all(cls)
-    #     for value in all_cls.values(): 564704a6-f894-4281-a36b-f2a667d79403
-    #         if (value.id == id):
-    #             return value
-
-    #     return None
-
-    # def count(self, cls=None):
-    #     """
-    #     count the number of objects in storage
-    #     """
-    #     all_class = classes.values()
-
-    #     if not cls:
-    #         count = 0
-    #         for clas in all_class:
-    #             count += len(models.storage.all(clas).values())
-    #     else:
-    #         count = len(models.storage.all(cls).values())
-
-    #     return count
