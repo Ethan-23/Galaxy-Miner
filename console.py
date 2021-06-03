@@ -2,15 +2,13 @@
 """ console """
 
 import cmd
-from datetime import datetime
-from hashlib import new
 import models
-from models.base_model import BaseModel
 from models.user import User
+from os import getenv
 import shlex  # for splitting the line along spaces except in double quotes
+from pymongo import MongoClient
 
 classes = {"User": User}
-
 
 class GalaxyCommand(cmd.Cmd):
     """ Galaxy console """
@@ -86,25 +84,44 @@ class GalaxyCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    # def do_update(self, arg):
-    #     """Update an instance based on the class name, id, attribute & value"""
-    #     args = shlex.split(arg)
-    #     if len(args) == 0:
-    #         print("** class name missing **")
-    #     elif args[0] in classes:
-    #         k = args[0]
-    #         if k in models.storage.all().items():
-    #             if len(args) > 2:
-    #                 if len(args) > 3:
-    #                     models.storage.all()[k].save()
-    #                 else:
-    #                     print("** value missing **")
-    #             else:
-    #                 print("** attribute name missing **")
-    #         else:
-    #             print("** no instance found **")
-    #     else:
-    #         print("** class doesn't exist **") 564704a6-f894-4281-a36b-f2a667d79403
+    def do_update(self, arg):
+        """Update an instance based on the class name, id, attribute & value"""
+        args = shlex.split(arg)
+        #connecting to db
+        try:
+            GALAXY_MONGO_HOST = getenv('GALAXY_MONGO_HOST')
+            cluster = MongoClient(host=GALAXY_MONGO_HOST)
+        except Exception as e:
+            print(e)
+            print("Can't connect")
+        db = cluster['Galaxy']
+        collection = db["User"]
+
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] in classes:
+            if len(args) > 1:
+                k = args[1]
+                for index in range(0, len(models.storage.all())):
+                    if k in models.storage.all()[index]['id']:
+                        if len(args) > 2:
+                            if len(args) > 3:
+                                #getting old values
+                                oldvalues = { args[2]: models.storage.all()[index][args[2]]}
+                                #getting new values
+                                newvalues = { "$set": { args[2]: args[3] } }
+                                #setting new values
+                                collection.update_one(oldvalues, newvalues)
+                            else:
+                                print("** value missing **")
+                        else:
+                            print("** attribute name missing **")
+                    else:
+                        print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
 
 if __name__ == '__main__':
     GalaxyCommand().cmdloop()
