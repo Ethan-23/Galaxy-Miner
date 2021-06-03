@@ -15,8 +15,12 @@ class DBStorage:
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        GALAXY_MONGO_HOST = getenv('GALAXY_MONGO_HOST')
-        cluster = MongoClient(host=GALAXY_MONGO_HOST)
+        try:
+            GALAXY_MONGO_HOST = getenv('GALAXY_MONGO_HOST')
+            cluster = MongoClient(host=GALAXY_MONGO_HOST)
+        except Exception as e:
+            print(e)
+            print("can't connect (__init__)")
         db = cluster['Galaxy']
         collection = db["User"]
         self.__engine = collection

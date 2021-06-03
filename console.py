@@ -10,6 +10,7 @@ from pymongo import MongoClient
 
 classes = {"User": User}
 
+
 class GalaxyCommand(cmd.Cmd):
     """ Galaxy console """
     prompt = '(console) '
@@ -87,7 +88,7 @@ class GalaxyCommand(cmd.Cmd):
     def do_update(self, arg):
         """Update an instance based on the class name, id, attribute & value"""
         args = shlex.split(arg)
-        #connecting to db
+        # connecting to db
         try:
             GALAXY_MONGO_HOST = getenv('GALAXY_MONGO_HOST')
             cluster = MongoClient(host=GALAXY_MONGO_HOST)
@@ -102,26 +103,30 @@ class GalaxyCommand(cmd.Cmd):
         elif args[0] in classes:
             if len(args) > 1:
                 k = args[1]
-                for index in range(0, len(models.storage.all())):
-                    if k in models.storage.all()[index]['id']:
-                        if len(args) > 2:
-                            if len(args) > 3:
-                                #getting old values
-                                oldvalues = { args[2]: models.storage.all()[index][args[2]]}
-                                #getting new values
-                                newvalues = { "$set": { args[2]: args[3] } }
-                                #setting new values
-                                collection.update_one(oldvalues, newvalues)
+                try:
+                    for index in range(0, len(models.storage.all())):
+                        obj = models.storage.all()[index]
+                        if k in obj['id']:
+                            if len(args) > 2:
+                                if len(args) > 3:
+                                    # getting old values
+                                    oldvalues = {args[2]: obj[args[2]]}
+                                    # getting new values
+                                    newvalues = {"$set": {args[2]: args[3]}}
+                                    # setting new values
+                                    collection.update_one(oldvalues, newvalues)
+                                else:
+                                    print("** value missing **")
                             else:
-                                print("** value missing **")
-                        else:
-                            print("** attribute name missing **")
-                    else:
-                        print("** no instance found **")
+                                print("** attribute name missing **")
+                except Exception as e:
+                    print(e)
+                    print("** no instance found **")
             else:
                 print("** instance id missing **")
         else:
             print("** class doesn't exist **")
+
 
 if __name__ == '__main__':
     GalaxyCommand().cmdloop()

@@ -1,9 +1,7 @@
 #!/usr/bin/python3
 """ holds class User"""
 
-import models
 from models.base_model import BaseModel
-from os import getenv
 from hashlib import md5
 
 
