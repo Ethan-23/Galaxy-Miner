@@ -18,11 +18,10 @@ class User(BaseModel):
     # else:
     email = ""
     password = ""
-    first_name = ""
-    last_name = ""
-    resource = None
-    drill_speed = None
-    drill_size = None
+    username = ""
+    resource = 0
+    drill_speed = 0
+    drill_size = 0
 
 
     def __init__(self, *args, **kwargs):

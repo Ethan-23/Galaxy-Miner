@@ -60,10 +60,10 @@ class GalaxyCommand(cmd.Cmd):
             print("** class name missing **")
             return False
         if args[0] in classes:
-            try:
+            if len(args) < 2:
                 print(models.storage.all())
-            except Exception as e:
-                print(e)
+            else:
+                print(models.storage.all(args[1]))
         else:
             print("** class doesn't exist **")
 

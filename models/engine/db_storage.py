@@ -2,6 +2,7 @@
 """
 Contains the class DBStorage
 """
+from hashlib import new
 from models.user import User
 from os import getenv
 from pymongo import MongoClient
@@ -25,17 +26,21 @@ class DBStorage:
         collection = db["User"]
         self.__engine = collection
 
-    def all(self, cls=None):
+    def all(self, id=None):
         """query on the current database session"""
         try:
             new_list = []
-            all_occur = self.__engine.find()
-            for i in all_occur:
-                new_list.append(i)
-            return new_list
+            if id == None:
+                all_occur = self.__engine.find()
+                for i in all_occur:
+                    new_list.append(i)
+                return new_list
+            else:
+                one_occur = self.__engine.find_one({"id": id})
+                return one_occur
         except Exception as e:
             print(e)
-            print("all")
+            print("** instance not found ** (all)")
 
     def new(self, obj):
         """add the object to the current database session"""
