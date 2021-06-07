@@ -19,17 +19,14 @@ class User(BaseModel):
     email = ""
     password = ""
     username = ""
-    resource = 0
-    drill_speed = 0
-    drill_size = 0
 
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
         super().__init__(*args, **kwargs)
 
-    def __setattr__(self, name, value):
-        """sets a password with md5 encryption"""
-        if name == "password":
-            value = md5(value.encode()).hexdigest()
-        super().__setattr__(name, value)
+    # def __setattr__(self, name, value):
+    #     """sets a password with md5 encryption"""
+    #     if name == "password":
+    #         value = md5(value.encode()).hexdigest()
+    #     super().__setattr__(name, value)

@@ -1,24 +1,22 @@
 #!/usr/bin/python3
 """Flask Setup"""
-
-from models import DBstorage
-from api.v1.views import app_views
-import flask
+from models.user import User
+from models import storage
+from flask import Flask
 from flask import request, jsonify
 from os import environ
+from api.v1.views import app_views
 from flask_cors import CORS
 
-app = flask.Flask(__name__)
-
+app = Flask(__name__)
 # CORS instance
-cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
-
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 app.register_blueprint(app_views)
 
 
-@app.teardown_appcontext
-def close(self):
-    DBstorage.close()
+# @app.teardown_appcontext
+# def close(self):
+#     DBstorage.close()
     
     
 @app.errorhandler(404)
@@ -34,6 +32,6 @@ def page_not_found2(err):
 
 
 if __name__ == "__main__":
-    env_host = environ.get('HBNB_API_HOST', default='0.0.0.0')
-    env_port = environ.get('HBNB_API_PORT', default=5000)
+    env_host = environ.get('GALAXY_HOST', default='localhost')
+    env_port = environ.get('GALAXY_PORT', default=5000)
     app.run(host=env_host, port=int(env_port), threaded=True)

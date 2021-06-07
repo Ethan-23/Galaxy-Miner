@@ -3,9 +3,12 @@
 Contains the class DBStorage
 """
 from hashlib import new
+
+from flask.json import dump
 from models.user import User
 from os import getenv
 from pymongo import MongoClient
+from bson.json_util import dumps, loads
 
 classes = {"User": User}
 
@@ -26,18 +29,22 @@ class DBStorage:
         collection = db["User"]
         self.__engine = collection
 
-    def all(self, id=None):
+    def all(self, id=None, email=None):
         """query on the current database session"""
         try:
-            new_list = []
-            if id == None:
+            if id is None and email is None:
                 all_occur = self.__engine.find()
-                for i in all_occur:
-                    new_list.append(i)
-                return new_list
-            else:
+                new_list = list(all_occur)
+                data = dumps(new_list)
+                return data
+            elif email is not None:
+                cursor_email = self.__engine.find_one({"email": email})
+                data = dumps(cursor_email)
+                return data
+            elif id is not None:
                 one_occur = self.__engine.find_one({"id": id})
-                return one_occur
+                data = dumps(one_occur)
+                return data
         except Exception as e:
             print(e)
             print("** instance not found ** (all)")
@@ -59,3 +66,13 @@ class DBStorage:
         except Exception as e:
             print("delete")
             print(e)
+
+
+    def update(self, id=None, attr=None):
+        """updates specific attributes in the database"""
+        try:
+            if id is not None and attr is not None:
+                self.__engine.update_one({"id": id}, {"$set": attr})
+        except Exception as e:
+            print(e)
+            print("Update") 
