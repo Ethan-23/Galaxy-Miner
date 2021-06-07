@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+	<html lang="eng">
+		<head>
+			<link rel="stylesheet" href="style/login.css">
+			<link rel="stylesheet" href="style/register.css">
+			<link rel="stylesheet" href="style/body.css">
+			
+			<title>Galaxy Miner</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		</head>
+		<body>
+			<div class="container">
+				<h1>Galaxy<br>Miner</h1>
+				<button class="regbutton"> Register </button>
+				<button class="loginbutton"> Log in </button>
+			</div>
+			
+			<div class="rmodal" id="register-modal">
+				<div class="register-modal-content">
+					<span class="register-close-btn">&times;</span>
+					<div class="register-content">
+						<form action="/" method="GET" class="register-modal-form" id="form">
+							<h2>Start your adventure today register below!</h2>
+						<div class="register-form-val">
+							<input type="text" class="register-modal-input" id="name" name="name" placeholder="Enter your username">
+							<p>Error Message</p>
+						</div>
+						<div class="register-form-val">
+							<input type="email" class="register-modal-input" id="email" name="email" placeholder="Enter your email">
+							<p>Error Message</p>
+						</div>
+						<div class="register-form-val">
+							<input type="password" class="register-modal-input" id="password" name="password" placeholder="Enter your password">
+							<p>Error Message</p>
+						</div>
+						<div class="register-form-val">
+							<input type="password" class="register-modal-input" id="password-confirm" name="password" placeholder="Confirm your password">
+							<p>Error Message</p>
+						</div>
+						<input type="submit" class="register-input-btn" value="Register">
+						<span class="register-input-login">Already have an account? Login <a href="#">here</a></span>
+						</form>
+					</div>
+				</div>
+			</div>
+			<script src="js/register.js"></script>
+			
+			<div class="lmodal" id="login-modal">
+				<div class="login-modal-content">
+					<span class="login-close-btn">&times;</span>
+					<div class="login-content">
+						<form action="/" method="GET" class="login-modal-form" id="form">
+							<h2>Sign in to continue your adventure!</h2>
+						<div class="login-form-val">
+							<input type="email" class="login-modal-input" id="email" name="email" placeholder="Enter your email">
+							<p>Error Message</p>
+						</div>
+						<div class="login-form-val">
+							<input type="password" class="login-modal-input" id="password" name="password" placeholder="Enter your password">
+							<p>Error Message</p>
+						</div>
+						<input type="submit" class="login-input-btn" value="Log in">
+						<span class="login-input-login">Dont have an account? Register <a href="#">here</a></span>
+						</form>
+					</div>
+				</div>
+			</div>
+			<script src="js/login.js"></script>
+		</body>
+	</html>
