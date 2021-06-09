@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+# Installing mongodb
+
+# making sure gnup is installed and importing public key
+sudo apt-get install gnupg
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+# creating list file for mongodb
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+
+# reload local package db
+sudo apt-get update
+
+#installing packages
+sudo apt-get install -y mongodb-org
+
+# start mongod process
+sudo systemctl start mongod
