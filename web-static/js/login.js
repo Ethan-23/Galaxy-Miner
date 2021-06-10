@@ -16,9 +16,9 @@ window.addEventListener('click', (e) => {
 	}
 })
 
-const logform = document.getElementById('form');
-const logemail = document.getElementById('email');
-const logpassword = document.getElementById('password');
+const logform = document.getElementById('logform');
+const logemail = document.getElementById('log-email');
+const logpassword = document.getElementById('log-password');
 
 function showError(input, message) {
 	const formValidation = input.parentElement;
@@ -42,24 +42,19 @@ function checkRequired(inputArr) {
 	})
 }
 
-function checkLength(input, min, max) {
-	if (input.value.length < min) {
-		showError(input, `${getFieldName(input)} must be at least ${min} characters`);
-	}
-	else if (input.value.length > max) {
-		showError(input, `${getFieldName(input)} must be less than ${max} characters`);
-	}
-	else {
-		showValid(input);
-	}
-}
 
 function getFieldName(input){
 	return input.name.charAt(0).toUpperCase() + input.name.slice(1);
 }
 
-logform.addEventListener('submit', (e) => {
-	e.preventDefault();
-	
+function getValue(input){
+	console.log(input.value);
+	return input.name;
+}
+
+logform.addEventListener('submit', (f) => {
+	f.preventDefault();
 	checkRequired([logemail, logpassword]);
+	console.log(logemail.value);
+	console.log(logpassword.value);
 })
