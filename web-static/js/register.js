@@ -37,7 +37,8 @@ function regShowValid(input){
 function regCheckRequired(inputArr) {
 	inputArr.forEach(function(input) {
 		if(input.value.trim() === ''){
-			regShowError(input, `${getFieldName(input)} is required`);
+			regShowError(input, `${regGetFieldName(input)} is required`);
+			return;
 		}else{
 			regShowValid(input);
 		}
@@ -46,10 +47,10 @@ function regCheckRequired(inputArr) {
 
 function regCheckLength(input, min, max) {
 	if (input.value.length < min) {
-		regShowError(input, `${getFieldName(input)} must be at least ${min} characters`);
+		regShowError(input, `${regGetFieldName(input)} must be at least ${min} characters`);
 	}
 	else if (input.value.length > max) {
-		regShowError(input, `${getFieldName(input)} must be less than ${max} characters`);
+		regShowError(input, `${regGetFieldName(input)} must be less than ${max} characters`);
 	}
 	else {
 		regShowValid(input);
@@ -68,7 +69,6 @@ function regGetFieldName(input){
 
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
-	
 	regCheckRequired([name, email, password, passwordConfirm]);
 	regCheckLength(name, 3, 30);
 	regCheckLength(password, 8, 25);
