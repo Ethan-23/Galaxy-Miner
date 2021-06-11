@@ -49,7 +49,16 @@ function getFieldName(input){
 
 function checkEmail(input){
     $.getJSON("http://localhost:5000/api/v1/users", function (data){
-	console.log(data);
+        $(data).each( function (index, value) {
+            console.log(input.value)
+            console.log(value["email"])
+            if (index.value == value["email"])
+            {
+                console.log("OH YAEHHHHHHH!!!!!")
+                console.log(value)
+            }
+        });
+	    // console.log(data);
     });
 }
 logform.addEventListener('submit', (f) => {
