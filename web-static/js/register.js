@@ -17,7 +17,7 @@ window.addEventListener('click', (e) => {
 })
 
 const form = document.getElementById('form');
-const name = document.getElementById('name');
+const username = document.getElementById('name');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const passwordConfirm = document.getElementById('password-confirm');
@@ -68,23 +68,48 @@ function regGetFieldName(input){
 }
 
 
-function regcheckEmail(input){
-    $.getJSON("http://localhost:5000/api/v1/users/email/" + input.value, function (data){
+function regcheckEmail(newEmail, newUsername, newPass){
+    $.getJSON("http://localhost:5000/api/v1/users/email/" + newEmail.value, function (data){
         if (data) {
-            showError(input, 'Email already in use');
+            showError(newEmail, 'Email already in use');
         }else {
             console.log("SEND IT");
+            registerAccount(newEmail.value, newUsername.value, newPass.value);
         }
     });
+}
+
+function registerAccount(newEmail, newUsername, newPass){
+    // $.post("http://localhost:5000/api/v1/users", {email: newEmail, username: newUsername, password: newPass})
+    // .done(function( data ) {
+    //     console.log("Done")
+    //   });
+    console.log(newEmail);
+    console.log(newUsername);
+    console.log(newPass);
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/api/v1/users",
+        dataType: 'json',
+        contentType: "application/json",
+        data: JSON.stringify({"email": newEmail, "username": newUsername, "password": newPass}),
+        success: function (data) {
+            console.log(data);
+            console.log("Posted");
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+      });
 }
 
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    regCheckRequired([name, email, password, passwordConfirm]);
-    regCheckLength(name, 3, 30);
+    regCheckRequired([username, email, password, passwordConfirm]);
+    regCheckLength(username, 3, 30);
     regCheckLength(password, 8, 25);
     regCheckLength(passwordConfirm, 8, 25);
     regPasswordMatch(password, passwordConfirm);
-    regcheckEmail(email);
+    regcheckEmail(email, username, password);
 })

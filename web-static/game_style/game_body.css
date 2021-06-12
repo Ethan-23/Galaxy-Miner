@@ -8,12 +8,6 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     background: transparent;
 }
 
-body  {
-  background: url("../images/background.png");
-  background-size: cover;
-}
-
-
 .sidebar {
 	position: fixed;
 	width: 15%;
@@ -68,6 +62,31 @@ body  {
 	height: 20%;
 	background-color: green;
 }
-.Planet {
-	margin-left: 100px;
+.main {
+	width: 85%;
+	height: 100%;
+	margin-left: 15%;
+	position: fixed;
+	border-right: solid 4px red;
+	margin-top:0px;
+	background: url("../images/background.png");
+	background-size: cover;
+}
+
+.planet {
+	background: url("../images/planet_null1.png");
+	background-position-x: center;
+	background-position-y: center;
+	width: 65%;
+	height: 100%;
+	border: none;
+	cursor:pointer;
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	background-repeat: no-repeat;
+	border-radius: 50%;
 }

@@ -55,6 +55,7 @@ function checkEmail(input, pass){
                 
                 console.log("OH YAEHHHHHHH!!!!!");
                 console.log(data);
+                location.href = "../web-static/main_page.html";
             }else {
                 showError(pass, 'incorrect password');
             }
