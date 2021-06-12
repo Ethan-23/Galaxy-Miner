@@ -1,0 +1,73 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body  {
+  background: url("../images/background.png");
+  background-size: cover;
+}
+
+
+.sidebar {
+	position: fixed;
+	width: 15%;
+	height: 100%;
+	border-right: solid 4px red;
+	background-color: silver;
+	margin-top:0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;	
+}
+
+.info {
+
+	width: 100%;
+	height: 15%;
+	background-color: white;
+}
+
+.drill {
+
+	width: 100%;
+	height: 40%;
+	background-color: brown;
+	display: inline-flex;
+	flex-direction: row;
+	flex-flow: wrap;
+	align-content: flex-start;
+}
+.drill-name {
+	width: 100%;
+	height: 15%;
+	background-color: yellow;
+}
+.upgrade-size {
+	width: 50%;
+	height: 20%;
+	background-color: blue;
+}
+.upgrade-speed {
+	width: 50%;
+	height: 20%;
+	background-color: green;
+}
+.SpeedButton {
+	width: 50%;
+	height: 20%;
+	background-color: red;
+}
+.SizeButton {
+	width: 50%;
+	height: 20%;
+	background-color: green;
+}
+.Planet {
+	margin-left: 100px;
+}
