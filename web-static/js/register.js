@@ -69,22 +69,12 @@ function regGetFieldName(input){
 
 
 function regcheckEmail(input){
-    $.getJSON("http://localhost:5000/api/v1/users", function (data){
-        $(data).each( function (index, value) {
-            // console.log(input.value)
-            // console.log(value["email"])
-            if (index.value === value["email"])
-            {
-                console.log("OH NOOOOO!!!!!")
-                // console.log(value["email"])
-                // console.log(value)
-                
-            }else {
-                console.log("OH YAEHHHHHHH!!!!!");
-                // console.log(value["email"])
-            }
-        });
-	    // console.log(data);
+    $.getJSON("http://localhost:5000/api/v1/users/email/" + input.value, function (data){
+        if (data) {
+            showError(input, 'Email already in use');
+        }else {
+            console.log("SEND IT");
+        }
     });
 }
 
@@ -95,6 +85,6 @@ form.addEventListener('submit', (e) => {
     regCheckLength(name, 3, 30);
     regCheckLength(password, 8, 25);
     regCheckLength(passwordConfirm, 8, 25);
-    regPasswordMatch(password, passwordConfirm)
-    regcheckEmail(email)
+    regPasswordMatch(password, passwordConfirm);
+    regcheckEmail(email);
 })

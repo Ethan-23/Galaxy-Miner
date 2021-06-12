@@ -47,22 +47,26 @@ function getFieldName(input){
     return input.name.charAt(0).toUpperCase() + input.name.slice(1);
 }
 
-function checkEmail(input){
-    $.getJSON("http://localhost:5000/api/v1/users", function (data){
-        $(data).each( function (index, value) {
-            console.log(input.value)
-            console.log(value["email"])
-            if (index.value == value["email"])
+function checkEmail(input, pass){
+    $.getJSON("http://localhost:5000/api/v1/users/email/" + input.value, function (data){
+        if (data) {
+            if (pass.value == data["password"])
             {
-                console.log("OH YAEHHHHHHH!!!!!")
-                console.log(value)
+                
+                console.log("OH YAEHHHHHHH!!!!!");
+                console.log(data);
+            }else {
+                showError(pass, 'incorrect password');
             }
-        });
-	    // console.log(data);
+        }else {
+            showError(input, 'couldn\'t find your account');
+            showError(pass, "");
+            return;
+        }
     });
 }
 logform.addEventListener('submit', (f) => {
     f.preventDefault();
     checkRequired([logemail, logpassword]);
-    checkEmail(logemail);
+    checkEmail(logemail, logpassword);
 })
