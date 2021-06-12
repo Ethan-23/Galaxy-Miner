@@ -33,5 +33,5 @@ def page_not_found2(err):
 
 if __name__ == "__main__":
     env_host = environ.get('GALAXY_HOST', default='localhost')
-    env_port = environ.get('GALAXY_PORT', default=5000)
+    env_port = environ.get('GALAXY_PORT', default='5000')
     app.run(host=env_host, port=int(env_port), threaded=True)
