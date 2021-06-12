@@ -47,17 +47,21 @@ function getFieldName(input){
     return input.name.charAt(0).toUpperCase() + input.name.slice(1);
 }
 
+function storeSession(){
+    const fullemail = logemail.value;
+    localStorage.setItem("EMAIL", fullemail);
+    return;
+}
+
 function checkEmail(input, pass){
     $.getJSON("http://localhost:5000/api/v1/users/email/" + input.value, function (data){
         if (data) {
-            if (pass.value == data["password"])
-            {
-                
-                console.log("OH YAEHHHHHHH!!!!!");
-                console.log(data);
+            if (pass.value == data["password"]){
                 location.href = "../web-static/main_page.html";
+                return;
             }else {
                 showError(pass, 'incorrect password');
+                return;
             }
         }else {
             showError(input, 'couldn\'t find your account');
@@ -66,8 +70,11 @@ function checkEmail(input, pass){
         }
     });
 }
+
 logform.addEventListener('submit', (f) => {
     f.preventDefault();
     checkRequired([logemail, logpassword]);
     checkEmail(logemail, logpassword);
+    storeSession();
+    return;
 })

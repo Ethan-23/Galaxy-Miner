@@ -2,6 +2,8 @@
 	<html lang="eng">
 		<head>
 		<link rel="stylesheet" href="game_style/game_body.css">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="js/game.js"></script>
 		<meta charset="UTF-8">
 		<title>Galaxy Miner</title>
 		</head>
@@ -10,20 +12,20 @@
 			</header>
 			<div class="sidebar">
 				<div class="title">
-				Galaxy Miner
+				<h1>Galaxy Legends</h1>
 				</div>
 				<div class="info">
-				Username
+				<h2>{{ username }}<br>{{ resources }}</h2>
 				</div>
 				<div class="drill">
 					<div class="drill-name">
-					<p1>DRILL</p1>
+					<h3>Drill</h3>
 					</div>
 					<div class="upgrade-size">
-					Size
+					<p1>{{ size }}</p1>
 					</div>
 					<div class="upgrade-speed">
-					Speed
+					<p2>{{ speed }}</p2>
 					</div>
 					<button class="SizeButton"> Upgrade </button>
 					<button class="SpeedButton"> Upgrade </button>

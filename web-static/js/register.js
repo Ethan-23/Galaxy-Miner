@@ -73,20 +73,12 @@ function regcheckEmail(newEmail, newUsername, newPass){
         if (data) {
             showError(newEmail, 'Email already in use');
         }else {
-            console.log("SEND IT");
             registerAccount(newEmail.value, newUsername.value, newPass.value);
         }
     });
 }
 
 function registerAccount(newEmail, newUsername, newPass){
-    // $.post("http://localhost:5000/api/v1/users", {email: newEmail, username: newUsername, password: newPass})
-    // .done(function( data ) {
-    //     console.log("Done")
-    //   });
-    console.log(newEmail);
-    console.log(newUsername);
-    console.log(newPass);
     $.ajax({
         type: "POST",
         url: "http://localhost:5000/api/v1/users",
@@ -95,7 +87,6 @@ function registerAccount(newEmail, newUsername, newPass){
         data: JSON.stringify({"email": newEmail, "username": newUsername, "password": newPass}),
         success: function (data) {
             console.log(data);
-            console.log("Posted");
         },
         error: function (jqXhr, textStatus, errorThrown) {
             console.log(errorThrown);
