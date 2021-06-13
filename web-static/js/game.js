@@ -1,6 +1,9 @@
 $(document).ready( function () {
     const email = localStorage.getItem('EMAIL');
-    // console.log(email);
+    const planetBtn = document.querySelector('.planet');
+    let num = 1;
+
+    //get the User info with Email we got from login
     $.getJSON("http://localhost:5000/api/v1/users/email/" + email, function (data){
         if (data) {
             userEmail = data['email'];
@@ -14,21 +17,29 @@ $(document).ready( function () {
             size = data['drill_size'];
             // console.log(size);
 
+            //set elements to the data we get
             document.getElementById("username").innerHTML = username;
             document.getElementById("resource").innerHTML = "Resources: " + resource;
             document.getElementById("speed").innerHTML = "Speed: " + speed;
             document.getElementById("size").innerHTML = "Size: " + size;
+    
+            //storing the data locally to be abled to use it from anywhere
             localStorage.setItem("RESOURCE", resource);
             localStorage.setItem("USERID", data['id']);
         }
     });
-    const planetBtn = document.querySelector('.planet');
 
-    planetBtn.addEventListener('click', () => {
+    //update Resources with the amount of 
+    planetBtn.addEventListener('click', function udpateResource() {
+        //getting the resources and updating it by 1
         let resources = localStorage.getItem('RESOURCE');
-        resources = parseInt(resources) + 1
+        resources = parseInt(resources) + num
+        //getting the id
         const id = localStorage.getItem('USERID');
+
+        //As long as resource exists...
         if (resource != null) {
+            //udpate resources by 1
             $.ajax({
                 url: 'http://localhost:5000/api/v1/users/' + id,
                 type: 'PUT',
@@ -40,7 +51,9 @@ $(document).ready( function () {
                     console.log(data);
                 }
             });
+            //update the resource stored locally
             localStorage.setItem("RESOURCE", resources);
+            //update the resource shown on the website
             document.getElementById("resource").innerHTML = "Resources: " + resources;
         }
     })
