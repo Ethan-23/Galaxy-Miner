@@ -1,6 +1,7 @@
 $(document).ready( function () {
     const email = localStorage.getItem('EMAIL');
     const planetBtn = document.querySelector('.planet');
+    const drill_speed = document.querySelector('.Uspeed');
     let num = 1;
 
     //get the User info with Email we got from login
@@ -56,5 +57,15 @@ $(document).ready( function () {
             //update the resource shown on the website
             document.getElementById("resource").innerHTML = "Resources: " + resources;
         }
+    })
+    speed.addEventListener('click',  function init() {
+        var int = self.setInterval(function () {
+            let resources = localStorage.getItem('RESOURCE');
+            resources = parseInt(resources) + num
+            localStorage.setItem("RESOURCE", resources);
+            document.getElementById("resource").innerHTML = "Resources: " + resources;
+            console.log("test");
+        }, 10000);
+        console.log(int);
     })
 })
