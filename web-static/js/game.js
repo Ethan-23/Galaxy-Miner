@@ -61,7 +61,7 @@ $(document).ready( function () {
                 }
             });
             //update the resource shown on the website
-            document.getElementById("resource").innerHTML = "Resources: " + resource_counter;
+            document.getElementById("resource").innerHTML = "Resources: " + resource_counter.toFixed(1);
             document.getElementById("speed").innerHTML = "Speed: " + user_speed;
             document.getElementById("size").innerHTML = "Size: " + user_size;
         }
