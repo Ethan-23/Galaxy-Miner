@@ -2,6 +2,8 @@ $(document).ready( function () {
     const email = localStorage.getItem('EMAIL');
     const planetBtn = document.querySelector('.planet');
     const drill_speed = document.querySelector('.Uspeed');
+    let resource_counter = 0
+    let user_id = 0
     let num = 1;
 
     //get the User info with Email we got from login
@@ -25,16 +27,17 @@ $(document).ready( function () {
             document.getElementById("size").innerHTML = "Size: " + size;
     
             //storing the data locally to be abled to use it from anywhere
-            localStorage.setItem("RESOURCE", resource);
-            localStorage.setItem("USERID", data['id']);
+            resource_counter = resource;
+            user_id = data['id'];
         }
     });
 
-    //update Resources with the amount of 
-    planetBtn.addEventListener('click', function udpateResource() {
+
+    //update Resources by 1
+    function udpateResource() {
         //getting the resources and updating it by 1
-        let resources = localStorage.getItem('RESOURCE');
-        resources = parseInt(resources) + num
+        resource_counter += num;
+        console.log(resource_counter);
         //getting the id
         const id = localStorage.getItem('USERID');
 
@@ -44,28 +47,32 @@ $(document).ready( function () {
             $.ajax({
                 url: 'http://localhost:5000/api/v1/users/' + id,
                 type: 'PUT',
-                data: JSON.stringify({"resource": parseInt(resources)}),
+                data: JSON.stringify({"resource": resource_counter}),
                 dataType: 'json',
                 contentType: "application/json",
                 success: function(data, textStatus) {
                     console.log(textStatus);
-                    console.log(data);
+                    // console.log(data);
                 }
             });
-            //update the resource stored locally
-            localStorage.setItem("RESOURCE", resources);
             //update the resource shown on the website
-            document.getElementById("resource").innerHTML = "Resources: " + resources;
+            document.getElementById("resource").innerHTML = "Resources: " + resource_counter;
         }
+    };
+
+
+    
+    planetBtn.addEventListener('click', () => {
+        udpateResource();
     })
-    speed.addEventListener('click',  function init() {
+
+
+    drill_speed.addEventListener('click',  function init() {
         var int = self.setInterval(function () {
-            let resources = localStorage.getItem('RESOURCE');
-            resources = parseInt(resources) + num
-            localStorage.setItem("RESOURCE", resources);
-            document.getElementById("resource").innerHTML = "Resources: " + resources;
+            resource_counter += num;
+            document.getElementById("resource").innerHTML = "Resources: " + resource_counter;
             console.log("test");
-        }, 10000);
+        }, 1000);
         console.log(int);
     })
 })
