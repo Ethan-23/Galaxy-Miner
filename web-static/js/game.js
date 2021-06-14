@@ -2,9 +2,12 @@ $(document).ready( function () {
     const email = localStorage.getItem('EMAIL');
     const planetBtn = document.querySelector('.planet');
     const drill_speed = document.querySelector('.Uspeed');
+    const drill_size = document.querySelector('.Usize');
     let resource_counter = 0;
+    let user_speed = 0;
+    let user_size = 0;
     let user_id = 0;
-    let num = 1;
+    let num = 0;
 
     //get the User info with Email we got from login
     $.getJSON("http://localhost:5000/api/v1/users/email/" + email, function (data){
@@ -28,15 +31,18 @@ $(document).ready( function () {
     
             //storing the data locally to be abled to use it from anywhere
             resource_counter = resource;
+            user_speed = speed;
+            user_size = size;
             user_id = data['id'];
+            dataload();
         }
     });
 
 
     //update Resources by 1
-    function udpateResource() {
+    function udpateResource(amount) {
         //getting the resources and updating it by 1
-        resource_counter += num;
+        resource_counter += amount;
         console.log(resource_counter);
         //getting the id
 
@@ -46,7 +52,7 @@ $(document).ready( function () {
             $.ajax({
                 url: 'http://localhost:5000/api/v1/users/' + user_id,
                 type: 'PUT',
-                data: JSON.stringify({"resource": resource_counter}),
+                data: JSON.stringify({"resource": resource_counter, "drill_speed": user_speed, "drill_size": user_size}),
                 dataType: 'json',
                 contentType: "application/json",
                 success: function(data, textStatus) {
@@ -56,21 +62,46 @@ $(document).ready( function () {
             });
             //update the resource shown on the website
             document.getElementById("resource").innerHTML = "Resources: " + resource_counter;
+            document.getElementById("speed").innerHTML = "Speed: " + user_speed;
+            document.getElementById("size").innerHTML = "Size: " + user_size;
         }
     };
 
 
     
-    planetBtn.addEventListener('click', () => {
-        udpateResource();
+    drill_size.addEventListener('click',  function init() {
+        cost = 1 //cost of upgrade 
+        if(resource_counter >= cost){
+            resource_counter -= cost; 
+            user_size += 1;
+            udpateResource(0);
+        }
     })
+
+
+
+    planetBtn.addEventListener('click', () => {
+        num = user_size
+        udpateResource(num);
+    })
+
 
 
     drill_speed.addEventListener('click',  function init() {
-        var int = self.setInterval(function () {
-            udpateResource();
-            console.log("test");
-        }, 1000);
-        console.log(int);
+        cost = 1 //cost of upgrade 
+        if(resource_counter >= cost){
+            resource_counter -= cost; 
+            user_speed += 1;
+            udpateResource(0);
+        }
     })
+    function dataload(){
+        if(user_speed > 0){
+            var int = self.setInterval(function () {
+                num = 1 * user_speed
+                udpateResource(num);
+                console.log("test");
+            }, 1000);
+        }
+    }
 })
