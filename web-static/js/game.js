@@ -2,8 +2,8 @@ $(document).ready( function () {
     const email = localStorage.getItem('EMAIL');
     const planetBtn = document.querySelector('.planet');
     const drill_speed = document.querySelector('.Uspeed');
-    let resource_counter = 0
-    let user_id = 0
+    let resource_counter = 0;
+    let user_id = 0;
     let num = 1;
 
     //get the User info with Email we got from login
@@ -39,13 +39,12 @@ $(document).ready( function () {
         resource_counter += num;
         console.log(resource_counter);
         //getting the id
-        const id = localStorage.getItem('USERID');
 
         //As long as resource exists...
         if (resource != null) {
             //udpate resources by 1
             $.ajax({
-                url: 'http://localhost:5000/api/v1/users/' + id,
+                url: 'http://localhost:5000/api/v1/users/' + user_id,
                 type: 'PUT',
                 data: JSON.stringify({"resource": resource_counter}),
                 dataType: 'json',
@@ -69,8 +68,7 @@ $(document).ready( function () {
 
     drill_speed.addEventListener('click',  function init() {
         var int = self.setInterval(function () {
-            resource_counter += num;
-            document.getElementById("resource").innerHTML = "Resources: " + resource_counter;
+            udpateResource();
             console.log("test");
         }, 1000);
         console.log(int);
