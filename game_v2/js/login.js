@@ -1,7 +1,9 @@
 //getting all buttons and form window we are using in login
 const loginmodal = document.getElementById('login-modal');
+const regmodal = document.getElementById('register-modal');
 const loginopenBtn = document.querySelector('.loginbutton');
 const logincloseBtn = document.querySelector('.login-close-btn');
+const hereLink = document.querySelector('.login-input-login');
 
 
 //if there's a click on the login we open the form
@@ -13,6 +15,13 @@ loginopenBtn.addEventListener('click', () => {
 //if there's a click close the form
 logincloseBtn.addEventListener('click', () => {
     loginmodal.style.display = 'none';
+})
+
+
+//if there's a click on here open opposite form
+hereLink.addEventListener('click', () => {
+    loginmodal.style.display = 'none';
+    regmodal.style.display = 'block';
 })
 
 
