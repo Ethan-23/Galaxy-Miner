@@ -33,15 +33,21 @@ class BaseModel:
                 self.resource = 0
             if kwargs.get("drill_speed", None) is None:
                 self.drill_speed = 0
-            if kwargs.get("dril_size", None) is None:
-                self.drill_size = 0
+            if kwargs.get("drill_pickaxe", None) is None:
+                self.drill_pickaxe = 0
+            if kwargs.get("drill_power", None) is None:
+                self.drill_power = 0
+            if kwargs.get("drill_durability", None) is None:
+                self.drill_durability = 0
         else:
             self.created_at = datetime.utcnow()
             self.updated_at = self.created_at
             self.id = str(uuid.uuid4())
             self.resource = 0
             self.drill_speed = 0
-            self.drill_size = 0
+            self.drill_pickaxe = 0
+            self.drill_power = 0
+            self.drill_durability = 0
 
     def __str__(self):
         """String representation of the BaseModel class"""
