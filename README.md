@@ -17,7 +17,7 @@ Read or watch:
 
 ---
 ## Installation
-* Clone this repository: `git clone "https://github.com/"`
+* Clone this repository: `git clone "https://github.com/Ethan-23/Galaxy-Miner"`
 * Access Galaxy Miner directory: `cd Galaxy-Miner`
 * Run galaxy-console(interactively): `./console` and enter command
 * Run galaxy-console(non-interactively): `echo "<command>" | ./console.py`
@@ -51,4 +51,4 @@ This project is interpreted/tested on Ubuntu 20.04 LTS using python3 (version 3.
 
 ## Author
 * **Matthew Feliciano** - [Mfeliciano778](https://github.com/Mfeliciano778)
-* **EThan Roberts** - [Ethan-23]https://github.com/Ethan-23)
+* **EThan Roberts** - [Ethan-23](https://github.com/Ethan-23)
