@@ -16,7 +16,14 @@ Read or watch:
 * [JQuery Ajax](https://intranet.hbtn.io/rltoken/pZmSwUxd65dxIrX7D4n1pg)
 
 ---
-## Learning Objectives:bulb:
+## Installation
+* Clone this repository: `git clone "https://github.com/"`
+* Access Galaxy Miner directory: `cd Galaxy-Miner`
+* Run galaxy-console(interactively): `./console` and enter command
+* Run galaxy-console(non-interactively): `echo "<command>" | ./console.py`
+
+---
+## Learning Objectives
 What you should learn from this project:
 
 * How to use JQuery to make front-end content
@@ -37,6 +44,9 @@ What you should learn from this project:
 * Update user information from the front-end
 
 ---
+## Environment
+This project is interpreted/tested on Ubuntu 20.04 LTS using python3 (version 3.6)
+
 ---
 
 ## Author
