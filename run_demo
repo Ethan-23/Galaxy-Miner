@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+# runs API and mongodb
+
+# kill all other python3 processes, which should only be the flask app
+pkill python3
+
+# run mongod
+sudo systemctl start mongod
+
+# run python3
+python3 -m api.v1.app &
