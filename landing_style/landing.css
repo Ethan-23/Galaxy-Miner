@@ -15,6 +15,10 @@ header {
     background: url("../game_v2/images/background.png");
 }
 
+header h1, header h2{
+    margin-top: 60px;
+}
+
 h1 {
     font-size: 80px;
     color: white;
@@ -46,7 +50,7 @@ body {
 
 h3 {
     color: white;
-    font-size: 30px;
+    font-size: 50px;
 }
 
 h4 {
@@ -54,10 +58,22 @@ h4 {
     font-size: 40px;
 }
 
-li {
+p {
     color: silver;
+    font-size: 25px;
 }
 
 footer{
     margin-top: 100px;
+}
+
+.sec1, .sec2, .sec3 {
+    padding-left: 15%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-right: 15%;
+}
+
+.big_button {
+    width: 75%;
 }
