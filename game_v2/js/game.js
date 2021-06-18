@@ -56,7 +56,7 @@ $(document).ready( function () {
     function udpateResource(amount) {
         //getting the resources and updating it by 1
         resource_counter += amount;
-        console.log(resource_counter);
+        //console.log(resource_counter);
         //getting the id
 
         //As long as resource exists...
@@ -69,7 +69,7 @@ $(document).ready( function () {
                 dataType: 'json',
                 contentType: "application/json",
                 success: function(data, textStatus) {
-                    console.log(textStatus);
+                    //console.log(textStatus);
                     // console.log(data);
                 }
             });
@@ -153,13 +153,10 @@ drill_pickaxe.addEventListener('click',  function init() {
         rps = (((0.1 * user_speed) + (1 * user_power)) * (user_durability + 1)).toFixed(1);
         document.getElementById("rps").innerHTML = "RPS: " + rps;
         document.getElementById("rpc").innerHTML = "RPC: " + rpc;
-        if(user_speed > 0 || user_power > 0){
             var int = self.setInterval(function () {
                 num = ((0.1 * user_speed) + (1 * user_power)) * (user_durability + 1);
                 udpateResource(num);
-                console.log("test");
             }, 1000);
-        }
     }
 //-----------------------------------------------------------------------------------------------------------------------------------------------
 })
