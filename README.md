@@ -1,5 +1,13 @@
 # Galaxy-Miner
+---
+## Introduction
 
+This is the repository for Galaxy Miner! Welcome all intergalactic gamers.
+
+Galaxy Miner is a classic clicker game. Once you start clicking you get resources, and with those resources you can buy upgrades for you drill.
+The objective of the game is to get as much resources as possible and upgrade your drill so it does all the work for you! Have fun!
+
+---
 ## Resources
 Read or watch:
 * [Mongodb](https://www.mongodb.com/)
@@ -19,9 +27,10 @@ Read or watch:
 ## Installation
 * Clone this repository: `git clone "https://github.com/Ethan-23/Galaxy-Miner"`
 * Access Galaxy Miner directory: `cd Galaxy-Miner`
+* Run installer for mongo: `./mongobash`
 * Run galaxy-console(interactively): `./console` and enter command
 * Run galaxy-console(non-interactively): `echo "<command>" | ./console.py`
-
+* Run galaxy-api: `python3 -m api.v1.app`
 ---
 ## Learning Objectives
 What you should learn from this project:
@@ -46,7 +55,7 @@ What you should learn from this project:
 ---
 ## Environment
 This project is interpreted/tested on Ubuntu 20.04 LTS using python3 (version 3.6)
-
+Also be sure to have Flask installed
 ---
 
 ## Author
